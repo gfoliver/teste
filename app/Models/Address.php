@@ -16,10 +16,16 @@ class Address extends Model
     protected $table = 'addresses';
 
     protected $fillable = [
+        'user_id',
         'street',
         'number',
         'neighborhood',
         'complement',
         'zip_code'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

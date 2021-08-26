@@ -23,6 +23,10 @@ class AddressService implements IAddressService
 
     public function update(int $id, array $data): ?Address
     {
+        foreach($data as $key => $field)
+            if (empty($field))
+                unset($data[$key]);
+
         return $this->addressRepository->update($id, $data);
     }
 
@@ -34,5 +38,10 @@ class AddressService implements IAddressService
     public function byId(int $id): ?Address
     {
         return $this->addressRepository->byId($id);
+    }
+
+    public function byIdAndUser(int $id, int $userId): ?Address
+    {
+        return $this->addressRepository->byIdAndUser($id, $userId);
     }
 }

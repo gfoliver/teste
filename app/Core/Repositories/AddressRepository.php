@@ -32,4 +32,9 @@ class AddressRepository implements IAddressRepository
     {
         return Address::find($id);
     }
+
+    public function byIdAndUser(int $id, int $userId): ?Address
+    {
+        return Address::where('user_id', $userId)->find($id);
+    }
 }

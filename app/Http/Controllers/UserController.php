@@ -35,7 +35,7 @@ class UserController extends Controller
 
     public function info()
     {
-        if ($user = $this->userService->byId(auth()->id()))
+        if ($user = $this->userService->byId(auth()->id(), ['addresses']))
             return Response::success($user->toArray());
 
         return Response::error();

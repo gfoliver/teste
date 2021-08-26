@@ -38,14 +38,8 @@ class UserService implements IUserService
         return $this->userRepository->delete($id);
     }
 
-    public function byId(int $id): ?User
+    public function byId(int $id, array $with = []): ?User
     {
-        return $this->userRepository->byId($id);
+        return $this->userRepository->byId($id, $with);
     }
-
-    public function byEmail(string $email): ?User
-    {
-        return $this->userRepository->byEmail($email);
-    }
-
 }

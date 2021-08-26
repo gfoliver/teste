@@ -13,4 +13,6 @@ interface IAddressRepository
     public function delete(int $id): bool;
 
     public function byId(int $id): ?Address;
+
+    public function byIdAndUser(int $id, int $userId): ?Address;
 }

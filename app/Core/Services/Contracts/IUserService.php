@@ -12,7 +12,5 @@ interface IUserService
 
     public function delete(int $id): bool;
 
-    public function byId(int $id): ?User;
-
-    public function byEmail(string $email): ?User;
+    public function byId(int $id, array $with = []): ?User;
 }

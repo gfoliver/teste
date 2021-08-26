@@ -28,13 +28,13 @@ class UserRepository implements IUserRepository
         return false;
     }
 
-    public function byId(int $id): ?User
+    public function byId(int $id, array $with = []): ?User
     {
-        return User::find($id);
-    }
+        $query = User::where('id', $id);
 
-    public function byEmail(string $email): ?User
-    {
-        return User::where('email', $email)->first();
+        if (!empty($with))
+            $query->with($with);
+
+        return $query->first();
     }
 }
