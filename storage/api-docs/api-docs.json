@@ -1,0 +1,300 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Teste Target.IT",
+        "version": "0.0.1"
+    },
+    "servers": [
+        {
+            "url": "http://testetarget.dev.com/api"
+        }
+    ],
+    "paths": {
+        "/address": {
+            "post": {
+                "tags": [
+                    "Address"
+                ],
+                "summary": "Create address",
+                "description": "Create a new address linked to the logged user",
+                "operationId": "e6a8db439c1d206e9db01dd8199be497",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "street": {
+                                        "type": "string"
+                                    },
+                                    "number": {
+                                        "type": "integer"
+                                    },
+                                    "neighborhood": {
+                                        "type": "string"
+                                    },
+                                    "complement": {
+                                        "type": "string"
+                                    },
+                                    "zip_code": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Address data"
+                    }
+                }
+            }
+        },
+        "/address/{id}": {
+            "get": {
+                "tags": [
+                    "Address"
+                ],
+                "summary": "Address info",
+                "description": "Get address data, restricted by logged user",
+                "operationId": "d2af57f99ad08511bd0dfc0f151a99fd",
+                "responses": {
+                    "200": {
+                        "description": "Address data"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Address"
+                ],
+                "summary": "Update address",
+                "description": "Update address data, restricted by logged user",
+                "operationId": "d07784f4e881ae3a22ec83f671ff8c01",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "street": {
+                                        "type": "string"
+                                    },
+                                    "number": {
+                                        "type": "integer"
+                                    },
+                                    "neighborhood": {
+                                        "type": "string"
+                                    },
+                                    "complement": {
+                                        "type": "string"
+                                    },
+                                    "zip_code": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Address data"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Address"
+                ],
+                "summary": "Delete address",
+                "description": "Delete an address, restricted by logged user",
+                "operationId": "ce3a7d6885b4007436d7e4a210d09176",
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Authentication",
+                "description": "Log in to the system with email and password",
+                "operationId": "8cb7742ae98d0990acb2907c4e00bf24",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "JWT Token"
+                    }
+                }
+            }
+        },
+        "/auth/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout",
+                "description": "Log out of the system",
+                "operationId": "0d29c740dc06d77602af8095bf4654cc",
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/auth/refresh": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Refresh token",
+                "description": "Refresh the jwt token for current logged user",
+                "operationId": "f6c9683ed975ace7d035a09e6e2a9332",
+                "responses": {
+                    "200": {
+                        "description": "JWT Token"
+                    }
+                }
+            }
+        },
+        "/user": {
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Update user data",
+                "description": "Update logged user data",
+                "operationId": "c1f4bf30328d3929c1d0563d017d5710",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "cpf": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User data"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Register user",
+                "description": "Register a new user with name, email, password, cpf and phone",
+                "operationId": "f94e4d203e152d68cdf5af306fd34f43",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "cpf": {
+                                        "type": "string"
+                                    },
+                                    "phone": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "password_confirmation": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User data"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Delete logged user",
+                "description": "Delete logged user",
+                "operationId": "f0a42451734c81280b324b51f88ca894",
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/user/info": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get logged user data",
+                "description": "Get logged user data",
+                "operationId": "55734f25a6c871ef986a3e67d68a07cb",
+                "responses": {
+                    "200": {
+                        "description": "User data"
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}

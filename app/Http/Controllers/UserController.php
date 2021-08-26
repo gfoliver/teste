@@ -17,6 +17,31 @@ class UserController extends Controller
         $this->userService = $userService;
     }
 
+    /**
+     * @OA\Post(
+     *     tags={"User"},
+     *     summary="Register user",
+     *     description="Register a new user with name, email, password, cpf and phone",
+     *     path="/user",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="name", type="string"),
+     *             @OA\Property(property="email", type="string"),
+     *             @OA\Property(property="cpf", type="string"),
+     *             @OA\Property(property="phone", type="string"),
+     *             @OA\Property(property="password", type="string"),
+     *             @OA\Property(property="password_confirmation", type="string"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response="200", description="User data"
+     *     )
+     * )
+     * @param Create $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function register(Create $request)
     {
         if ($user = $this->userService->create($request->validated()))
@@ -25,6 +50,29 @@ class UserController extends Controller
         return Response::error();
     }
 
+    /**
+     * @OA\Put(
+     *     tags={"User"},
+     *     summary="Update user data",
+     *     description="Update logged user data",
+     *     path="/user",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="name", type="string"),
+     *             @OA\Property(property="email", type="string"),
+     *             @OA\Property(property="cpf", type="string"),
+     *             @OA\Property(property="phone", type="string"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response="200", description="User data"
+     *     )
+     * )
+     * @param Create $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function update(Update $request)
     {
         if ($user = $this->userService->update(auth()->id(), $request->validated()))
@@ -33,6 +81,16 @@ class UserController extends Controller
         return Response::error();
     }
 
+    /**
+     * @OA\Get(
+     *     tags={"User"},
+     *     summary="Get logged user data",
+     *     description="Get logged user data",
+     *     path="/user/info",
+     *     @OA\Response(response="200", description="User data")
+     * )
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function info()
     {
         if ($user = $this->userService->byId(auth()->id(), ['addresses']))
@@ -41,6 +99,16 @@ class UserController extends Controller
         return Response::error();
     }
 
+    /**
+     * @OA\Delete(
+     *     tags={"User"},
+     *     summary="Delete logged user",
+     *     description="Delete logged user",
+     *     path="/user",
+     *     @OA\Response(response="200", description="")
+     * )
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function delete()
     {
         if ($this->userService->delete(auth()->id())) {

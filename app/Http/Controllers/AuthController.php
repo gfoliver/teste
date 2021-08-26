@@ -17,6 +17,27 @@ class AuthController extends Controller
         $this->userService = $userService;
     }
 
+    /**
+     * @OA\Post(
+     *     tags={"Auth"},
+     *     summary="Authentication",
+     *     description="Log in to the system with email and password",
+     *     path="/auth/login",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="email", type="string"),
+     *             @OA\Property(property="password", type="string"),
+     *         )
+     *     ),
+     *     @OA\Response(
+     *          response="200", description="JWT Token"
+     *     )
+     * )
+     * @param Login $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function login(Login $request): \Illuminate\Http\JsonResponse
     {
         if (! $token = auth()->attempt($request->validated())) {
@@ -26,6 +47,18 @@ class AuthController extends Controller
         return $this->respondWithToken($token);
     }
 
+    /**
+     * @OA\Post(
+     *     tags={"Auth"},
+     *     summary="Logout",
+     *     description="Log out of the system",
+     *     path="/auth/logout",
+     *     @OA\Response(
+     *          response="200", description=""
+     *     )
+     * )
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function logout(): \Illuminate\Http\JsonResponse
     {
         auth()->logout();
@@ -33,6 +66,18 @@ class AuthController extends Controller
         return Response::success();
     }
 
+    /**
+     * @OA\Post(
+     *     tags={"Auth"},
+     *     summary="Refresh token",
+     *     description="Refresh the jwt token for current logged user",
+     *     path="/auth/refresh",
+     *     @OA\Response(
+     *          response="200", description="JWT Token"
+     *     )
+     * )
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function refresh(): \Illuminate\Http\JsonResponse
     {
         return $this->respondWithToken(auth()->refresh());
